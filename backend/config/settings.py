@@ -167,6 +167,8 @@ REST_FRAMEWORK = {
         "rest_framework.pagination.PageNumberPagination"
     ),
 
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+
     "PAGE_SIZE": 10,
 }
 
