@@ -40,3 +40,31 @@ export async function getProducts(): Promise<Product[]> {
 
   return Array.isArray(data) ? data : data.results;
 }
+
+
+
+export async function getProductBySlug(
+  slug: string
+): Promise<Product> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/products/?search=${encodeURIComponent(slug)}`,
+    { cache: "no-store" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch product.");
+  }
+
+  const data: PaginatedResponse<Product> | Product[] =
+    await response.json();
+
+  const products = Array.isArray(data) ? data : data.results;
+
+  const product = products.find((item) => item.slug === slug);
+
+  if (!product) {
+    throw new Error("Product not found.");
+  }
+
+  return product;
+}
