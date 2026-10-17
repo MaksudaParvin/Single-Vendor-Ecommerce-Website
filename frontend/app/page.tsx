@@ -1,11 +1,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import type { Product } from "../lib/api";
 import { getProducts } from "../lib/api";
 import styles from "./page.module.css";
 
 export default async function HomePage() {
-  let products = [];
+  let products: Product[] = [];
 
   try {
     products = await getProducts();
